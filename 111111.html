@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Camera</title>
+</head>
+<body>
+  <h1>Open Camera</h1>
+  <video id="video" width="640" height="480" autoplay></video>
+  <button id="startButton">Start Camera</button>
+
+  <script>
+    const video = document.getElementById('video');
+    const startButton = document.getElementById('startButton');
+
+    startButton.addEventListener('click', () => {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function(stream) {
+            video.srcObject = stream;
+          })
+          .catch(function(err) {
+            console.log("Error: " + err);
+          });
+      } else {
+        alert('Camera is not supported in your browser.');
+      }
+    });
+  </script>
+</body>
+</html>
